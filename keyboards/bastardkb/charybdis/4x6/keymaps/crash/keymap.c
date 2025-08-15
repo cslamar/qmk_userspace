@@ -27,6 +27,13 @@ enum charybdis_keymap_layers {
     LAYER_POINTER,
 };
 
+enum custom_keycodes {
+     HOLO_WINDOW = SAFE_RANGE,
+     CHRIS_WINDOW,
+     NEW_TERM,
+     TOGGLE_FULL,
+};
+
 /** \brief Automatically enable sniping-mode on the pointer layer. */
 #define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
@@ -73,28 +80,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_LOWER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮                           ╭──────────────────────────────────────────────────────╮
-       KC_TILD,       KC_EXLM, KC_AT,           KC_HASH,           KC_DLR,  KC_PERC,       KC_CIRC,   KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
+       KC_TILD,       KC_EXLM,   KC_AT,           KC_HASH,           KC_DLR,  KC_PERC,        KC_CIRC,      KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├──────────────────────────────────────────────────────┤                    
-       RGB_MOD,       XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, XXXXXXX,       KC_LBRC,   KC_P7,   KC_UP,   KC_P9,   KC_RBRC, XXXXXXX,
+       RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      KC_P7,   KC_UP,   KC_P9,   KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-       KC_LEFT_SHIFT, KC_LGUI, KC_LALT,          KC_LCTL, KC_LSFT, XXXXXXX,                KC_PPLS,   KC_LEFT, KC_DOWN, KC_RGHT, KC_PMNS, KC_PEQL,
+       KC_LEFT_SHIFT, KC_LGUI,   KC_LALT,    KC_LCTL,                TOGGLE_FULL, XXXXXXX,    HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      _______, XXXXXXX, XXXXXXX, CHRIS_WINDOW, XXXXXXX, XXXXXXX,                              KC_PAST,      KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
-                                  XXXXXXX, XXXXXXX, _______,                               XXXXXXX,   _______,
-                                           XXXXXXX, _______,                               KC_P0
+                                  XXXXXXX, XXXXXXX, _______,                                  XXXXXXX,   _______,
+                                           XXXXXXX, _______,                                  KC_P0
   //                            ╰───────────────────────────╯                           ╰──────────────────╯
   ),
 
   [LAYER_RAISE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮                   ╭──────────────────────────────────────────────────────╮
-        KC_TILD,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_F11,
+        KC_TILD,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_F11,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
+       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                       XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
+       _______, KC_LEFT,   KC_UP, KC_DOWN, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
+       _______, KC_HOME, KC_PGUP, CHRIS_WINDOW,  KC_END, XXXXXXX,                  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
                                   _______, _______, XXXXXXX,                        _______, _______,
                                            _______, _______,                        _______
@@ -103,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_POINTER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       QK_BOOT,  EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,  EE_CLR,
+       QK_BOOT,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,    S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,   S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -157,3 +164,62 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 #endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case HOLO_WINDOW:
+        if (record->event.pressed) {
+            // when keycode HOLO_WINDOW is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            tap_code(KC_H);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode HOLO_WINDOW is released
+        }
+        break;
+
+     case CHRIS_WINDOW:
+        if (record->event.pressed) {
+            // when keycode CHRIS_WINDOW is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            tap_code(KC_C);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode CHRIS_WINDOW is released
+        }
+        break;
+
+     case NEW_TERM:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_T);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case TOGGLE_FULL:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            tap_code(KC_F);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+    }
+    return true;
+};
