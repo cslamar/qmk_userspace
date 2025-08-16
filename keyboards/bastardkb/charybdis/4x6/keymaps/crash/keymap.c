@@ -32,6 +32,14 @@ enum custom_keycodes {
      CHRIS_WINDOW,
      NEW_TERM,
      TOGGLE_FULL,
+     SLACK_PIKA,
+     SLACK_MEETING,
+     NEW_INCOG,
+     SIGNAL_TOGGLE,
+     COPY_URL,
+     NEW_DEV_WINDOW,
+     NEW_CODE_WINDOW,
+     RAYCAST,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -73,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                               KC_BSPC, KC_SPC, KC_LGUI,          KC_LALT,  KC_ENT,
+                               KC_BSPC, RAYCAST, KC_LGUI,         KC_LALT,  KC_ENT,
                                         KC_LALT, LOWER,           RAISE
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -82,11 +90,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                           ╭──────────────────────────────────────────────────────╮
        KC_TILD,       KC_EXLM,   KC_AT,           KC_HASH,           KC_DLR,  KC_PERC,        KC_CIRC,      KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├──────────────────────────────────────────────────────┤                    
-       RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      KC_P7,   KC_UP,   KC_P9,   KC_RBRC, XXXXXXX,
+       RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      KC_P7,   KC_UP,   KC_P9,   SLACK_PIKA, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-       KC_LEFT_SHIFT, KC_LGUI,   KC_LALT,    KC_LCTL,                TOGGLE_FULL, XXXXXXX,    HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PMNS, KC_PEQL,
+       KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-      _______, XXXXXXX, XXXXXXX, CHRIS_WINDOW, XXXXXXX, XXXXXXX,                              KC_PAST,      KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                             NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
                                   XXXXXXX, XXXXXXX, _______,                                  XXXXXXX,   _______,
                                            XXXXXXX, _______,                                  KC_P0
@@ -97,11 +105,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                   ╭──────────────────────────────────────────────────────╮
         KC_TILD,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_F11,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
+       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, SLACK_PIKA, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_LEFT,   KC_UP, KC_DOWN, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
+       _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_HOME, KC_PGUP, CHRIS_WINDOW,  KC_END, XXXXXXX,                  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
+       _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
                                   _______, _______, XXXXXXX,                        _______, _______,
                                            _______, _______,                        _______
@@ -166,6 +174,8 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static uint16_t raycast_timer;
+
     switch (keycode) {
     case HOLO_WINDOW:
         if (record->event.pressed) {
@@ -218,6 +228,128 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             unregister_code(KC_LALT);
         } else {
             // when keycode is released
+        }
+        break;
+
+     case SLACK_PIKA:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_P);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case SLACK_MEETING:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_M);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case NEW_INCOG:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            tap_code(KC_I);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case SIGNAL_TOGGLE:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_S);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case COPY_URL:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_X);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case NEW_DEV_WINDOW:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            tap_code(KC_D);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case NEW_CODE_WINDOW:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_V);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case RAYCAST:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            // start keypress timer
+            raycast_timer = timer_read();
+        } else {
+            // when keycode is released
+            // if keypress timer is shorter than predefined hold time, it's a tap
+            if (timer_elapsed(raycast_timer) < TAPPING_TERM) {
+               // send the tap version of the key
+               tap_code(KC_SPC);
+            } else {
+               // otherwise preform the macro combo once the held timer has passed the predefined value.
+               // Cmd - Space
+               register_code(KC_LGUI);
+               tap_code(KC_SPC);
+               unregister_code(KC_LGUI);
+            }
         }
         break;
     }
