@@ -39,6 +39,7 @@ enum custom_keycodes {
      COPY_URL,
      NEW_DEV_WINDOW,
      NEW_CODE_WINDOW,
+     RAYCAST,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -80,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                               KC_BSPC, KC_SPC, KC_LGUI,          KC_LALT,  KC_ENT,
+                               KC_BSPC, RAYCAST, KC_LGUI,         KC_LALT,  KC_ENT,
                                         KC_LALT, LOWER,           RAISE
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -91,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                    
        RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      KC_P7,   KC_UP,   KC_P9,   SLACK_PIKA, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-       KC_LEFT_SHIFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PMNS, KC_PEQL,
+       KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
       _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                             NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
@@ -173,6 +174,8 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static uint16_t raycast_timer;
+
     switch (keycode) {
     case HOLO_WINDOW:
         if (record->event.pressed) {
@@ -326,6 +329,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             unregister_code(KC_LALT);
         } else {
             // when keycode is released
+        }
+        break;
+
+     case RAYCAST:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            // start keypress timer
+            raycast_timer = timer_read();
+        } else {
+            // when keycode is released
+            // if keypress timer is shorter than predefined hold time, it's a tap
+            if (timer_elapsed(raycast_timer) < TAPPING_TERM) {
+               // send the tap version of the key
+               tap_code(KC_SPC);
+            } else {
+               // otherwise preform the macro combo once the held timer has passed the predefined value.
+               // Cmd - Space
+               register_code(KC_LGUI);
+               tap_code(KC_SPC);
+               unregister_code(KC_LGUI);
+            }
         }
         break;
     }
