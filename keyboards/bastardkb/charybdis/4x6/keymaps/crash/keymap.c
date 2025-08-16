@@ -35,6 +35,10 @@ enum custom_keycodes {
      SLACK_PIKA,
      SLACK_MEETING,
      NEW_INCOG,
+     SIGNAL_TOGGLE,
+     COPY_URL,
+     NEW_DEV_WINDOW,
+     NEW_CODE_WINDOW,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -87,9 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                    
        RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      KC_P7,   KC_UP,   KC_P9,   SLACK_PIKA, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-       KC_LEFT_SHIFT, KC_LGUI,   KC_LALT,    KC_LCTL,                TOGGLE_FULL, XXXXXXX,    HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PMNS, KC_PEQL,
+       KC_LEFT_SHIFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-      _______, XXXXXXX, XXXXXXX, CHRIS_WINDOW, XXXXXXX, XXXXXXX,                              NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                             NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
                                   XXXXXXX, XXXXXXX, _______,                                  XXXXXXX,   _______,
                                            XXXXXXX, _______,                                  KC_P0
@@ -102,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, SLACK_PIKA, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_LEFT,   KC_UP, KC_DOWN, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
+       _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_HOME, KC_PGUP, CHRIS_WINDOW,  KC_END, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
+       _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
                                   _______, _______, XXXXXXX,                        _______, _______,
                                            _______, _______,                        _______
@@ -260,6 +264,64 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             register_code(KC_LALT);
             register_code(KC_LCTL);
             tap_code(KC_I);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case SIGNAL_TOGGLE:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_S);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case COPY_URL:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_X);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case NEW_DEV_WINDOW:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            tap_code(KC_D);
+            unregister_code(KC_LCTL);
+            unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case NEW_CODE_WINDOW:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LALT);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+            tap_code(KC_V);
+            unregister_code(KC_LSFT);
             unregister_code(KC_LCTL);
             unregister_code(KC_LALT);
         } else {
