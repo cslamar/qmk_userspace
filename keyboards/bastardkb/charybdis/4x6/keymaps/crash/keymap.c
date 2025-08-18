@@ -40,6 +40,8 @@ enum custom_keycodes {
      NEW_DEV_WINDOW,
      NEW_CODE_WINDOW,
      RAYCAST,
+     BACK_COMBO,
+     FORWARD_COMBO,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -90,28 +92,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                           ╭──────────────────────────────────────────────────────╮
        KC_TILD,       KC_EXLM,   KC_AT,           KC_HASH,           KC_DLR,  KC_PERC,        KC_CIRC,      KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├──────────────────────────────────────────────────────┤                    
-       RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      KC_P7,   KC_UP,   KC_P9,   SLACK_PIKA, XXXXXXX,
+       RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      BACK_COMBO,   KC_UP,   FORWARD_COMBO,   SLACK_PIKA, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
        KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
       _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                             NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
-                                  XXXXXXX, XXXXXXX, _______,                                  XXXXXXX,   _______,
+                                  XXXXXXX, KC_PAGE_UP, _______,                                  XXXXXXX,   _______,
                                            XXXXXXX, _______,                                  KC_P0
   //                            ╰───────────────────────────╯                           ╰──────────────────╯
   ),
 
   [LAYER_RAISE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮                   ╭──────────────────────────────────────────────────────╮
-        KC_TILD,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_F11,
+        KC_TILD,   KC_F1,   KC_F2,   KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_F11,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, SLACK_PIKA, KC_VOLU,
+       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   BACK_COMBO, XXXXXXX, FORWARD_COMBO, SLACK_PIKA, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
-                                  _______, _______, XXXXXXX,                        _______, _______,
+                                  _______, KC_PAGE_UP, XXXXXXX,                        _______, _______,
                                            _______, _______,                        _______
   //                            ╰───────────────────────────╯                   ╰──────────────────╯
   ),
@@ -312,6 +314,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code(KC_D);
             unregister_code(KC_LCTL);
             unregister_code(KC_LALT);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case BACK_COMBO:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LGUI);
+            register_code(KC_LSFT);
+            tap_code(KC_LEFT_BRACKET);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LGUI);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case FORWARD_COMBO:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LGUI);
+            register_code(KC_LSFT);
+            tap_code(KC_RIGHT_BRACKET);
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LGUI);
         } else {
             // when keycode is released
         }
