@@ -367,8 +367,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             raycast_timer = timer_read();
         } else {
             // when keycode is released
-            // if keypress timer is shorter than predefined hold time, it's a tap
-            if (timer_elapsed(raycast_timer) < TAPPING_TERM) {
+            // if keypress timer is shorter than predefined hold timer in ms, it's a tap
+            if (timer_elapsed(raycast_timer) < 300) {
                // send the tap version of the key
                tap_code(KC_SPC);
             } else {
