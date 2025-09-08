@@ -42,6 +42,7 @@ enum custom_keycodes {
      RAYCAST,
      BACK_COMBO,
      FORWARD_COMBO,
+     RAYCAST2,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -83,8 +84,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                               KC_BSPC, RAYCAST, KC_LGUI,         KC_LALT,  KC_ENT,
-                                        KC_LALT, LOWER,           RAISE
+                               KC_BSPC, KC_SPACE, KC_LGUI,        KC_LALT,  KC_ENT,
+                                        KC_LALT,  LOWER,          RAISE
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -113,8 +114,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
-                                  _______, KC_PAGE_UP, XXXXXXX,                        _______, _______,
-                                           _______, _______,                        _______
+                                  _______, RAYCAST2, XXXXXXX,                        _______, _______,
+                                           _______,  _______,                        _______
   //                            ╰───────────────────────────╯                   ╰──────────────────╯
   ),
 
@@ -340,6 +341,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code(KC_RIGHT_BRACKET);
             unregister_code(KC_LSFT);
             unregister_code(KC_LGUI);
+        } else {
+            // when keycode is released
+        }
+        break;
+
+     case RAYCAST2:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LGUI);
+            tap_code(KC_SPC);
+            unregister_code(KC_LGUI);
+
         } else {
             // when keycode is released
         }
