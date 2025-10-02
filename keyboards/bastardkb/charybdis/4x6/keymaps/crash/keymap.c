@@ -97,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
        KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                             NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                     NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
-                                  XXXXXXX, KC_PAGE_UP, _______,                                  XXXXXXX,   _______,
+                                KC_DELETE, KC_PAGE_UP, _______,                               XXXXXXX,   _______,
                                            XXXXXXX, _______,                                  KC_P0
   //                            ╰───────────────────────────╯                           ╰──────────────────╯
   ),
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
-                                  _______, RAYCAST2, XXXXXXX,                        _______, _______,
+                                  KC_DELETE, RAYCAST2, _______,                        _______, _______,
                                            _______,  _______,                        _______
   //                            ╰───────────────────────────╯                   ╰──────────────────╯
   ),
