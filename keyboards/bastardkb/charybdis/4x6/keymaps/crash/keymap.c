@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_LOWER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮                           ╭──────────────────────────────────────────────────────╮
-       KC_GRAVE,       KC_EXLM,   KC_AT,           KC_HASH,           KC_DLR,  KC_PERC,        KC_CIRC,      KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
+       KC_GRAVE,       KC_EXLM,   KC_AT,           KC_HASH,           KC_DLR,  KC_PERC,        KC_CIRC,      KC_AMPR, KC_ASTR, KC_LPRN, KC_F12, KC_UNDS,
   // ├──────────────────────────────────────────────────────┤                    
        RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      BACK_COMBO,   KC_UP,   FORWARD_COMBO,   SLACK_PIKA, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_RAISE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮                   ╭──────────────────────────────────────────────────────╮
-        KC_GRAVE,   KC_F1,   KC_F2,   KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_F11,
+        KC_GRAVE,   KC_F1,   KC_F2,   KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F12,   KC_F11,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   BACK_COMBO, XXXXXXX, FORWARD_COMBO, SLACK_PIKA, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
-                                  KC_DELETE, RAYCAST2, _______,                        _______, _______,
+                                  KC_DELETE, RAYCAST2, _______,                        KC_PAGE_UP, _______,
                                            _______,  _______,                        _______
   //                            ╰───────────────────────────╯                   ╰──────────────────╯
   ),
