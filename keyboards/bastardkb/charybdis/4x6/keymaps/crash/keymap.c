@@ -95,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                    
        RGB_MOD,       XXXXXXX,   KC_LEFT_BRACKET, KC_RIGHT_BRACKET,  XXXXXXX, NEW_TERM,       KC_LBRC,      BACK_COMBO,   KC_UP,   FORWARD_COMBO,   SLACK_PIKA, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-       KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PEQL,
+       KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PGUP,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                     NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                     NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PGDN,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
                                 KC_DELETE, KC_PAGE_UP, _______,                               XXXXXXX,   _______,
                                            XXXXXXX, _______,                                  KC_P0
@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
        _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   BACK_COMBO, XXXXXXX, FORWARD_COMBO, SLACK_PIKA, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  XXXXXXX,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
+       _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  KC_PGUP,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, XXXXXXX,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
+       _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, KC_PGDN,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
                                   KC_DELETE, RAYCAST2, _______,                        KC_PAGE_UP, _______,
                                            _______,  _______,                        _______
