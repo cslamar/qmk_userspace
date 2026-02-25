@@ -43,6 +43,8 @@ enum custom_keycodes {
      BACK_COMBO,
      FORWARD_COMBO,
      RAYCAST2,
+     MOVE_WINDOW,
+     RESIZE_WINDOW,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -85,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                KC_BSPC, KC_SPACE, KC_LGUI,        KC_LALT,  KC_ENT,
-                                        KC_LALT,  LOWER,          RAISE
+                                        KC_LCTL,  LOWER,          RAISE
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -100,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                     NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PGDN,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
                                 KC_DELETE, KC_PAGE_UP, _______,                               XXXXXXX,   _______,
-                                           XXXXXXX, _______,                                  KC_P0
+                                           _______, _______,                                  KC_P0
   //                            ╰───────────────────────────╯                           ╰──────────────────╯
   ),
 
@@ -120,18 +122,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [LAYER_POINTER] = LAYOUT(
-  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       QK_BOOT,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  QK_BOOT,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,   S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, _______, DRGSCRL, SNIPING, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, SNIPING, DRGSCRL, _______, XXXXXXX,
-  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  KC_BTN2, KC_BTN1, KC_BTN3,    KC_BTN3, KC_BTN1,
-                                           XXXXXXX, KC_BTN2,    KC_BTN2
-  //                            ╰───────────────────────────╯ ╰──────────────────╯
+  // ╭──────────────────────────────────────────────────────╮           ╭──────────────────────────────────────────────────────╮
+       QK_BOOT,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      EE_CLR,         EE_CLR,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  QK_BOOT,
+  // ├──────────────────────────────────────────────────────┤           ├──────────────────────────────────────────────────────┤
+       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD,      S_D_MOD,        S_D_MOD,     DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  // ├──────────────────────────────────────────────────────┤           ├──────────────────────────────────────────────────────┤
+       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT,       XXXXXXX,        XXXXXXX,     KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+  // ├──────────────────────────────────────────────────────┤           ├──────────────────────────────────────────────────────┤
+       XXXXXXX, _______, DRGSCRL, SNIPING, RESIZE_WINDOW, MOVE_WINDOW,    MOVE_WINDOW, RESIZE_WINDOW, SNIPING, DRGSCRL, _______, XXXXXXX,   // May put MOVE_WINDOW and RESIZE_WINDOW on the first to cols of this row.
+  // ╰──────────────────────────────────────────────────────┤           ├──────────────────────────────────────────────────────╯
+                                  KC_BTN2, KC_BTN1, KC_BTN3,                KC_BTN2, KC_BTN1,
+                                           _______, KC_BTN2,                KC_BTN3
+  //                            ╰───────────────────────────╯           ╰──────────────────╯
   ),
 };
 // clang-format on
@@ -209,13 +211,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      case NEW_TERM:
         if (record->event.pressed) {
             // when keycode is pressed
-            register_code(KC_LALT);
-            register_code(KC_LCTL);
-            register_code(KC_LSFT);
+            register_code(KC_LGUI);
             tap_code(KC_T);
-            unregister_code(KC_LSFT);
-            unregister_code(KC_LCTL);
-            unregister_code(KC_LALT);
+            unregister_code(KC_LGUI);
         } else {
             // when keycode is released
         }
@@ -224,11 +222,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      case TOGGLE_FULL:
         if (record->event.pressed) {
             // when keycode is pressed
-            register_code(KC_LALT);
-            register_code(KC_LCTL);
-            tap_code(KC_F);
-            unregister_code(KC_LCTL);
-            unregister_code(KC_LALT);
+            register_code(KC_LGUI);
+            tap_code(KC_V);
+            unregister_code(KC_LGUI);
         } else {
             // when keycode is released
         }
@@ -277,20 +273,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
 
-     case SIGNAL_TOGGLE:
-        if (record->event.pressed) {
-            // when keycode is pressed
-            register_code(KC_LALT);
-            register_code(KC_LCTL);
-            register_code(KC_LSFT);
-            tap_code(KC_S);
-            unregister_code(KC_LSFT);
-            unregister_code(KC_LCTL);
-            unregister_code(KC_LALT);
-        } else {
-            // when keycode is released
-        }
-        break;
 
      case COPY_URL:
         if (record->event.pressed) {
@@ -323,11 +305,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      case BACK_COMBO:
         if (record->event.pressed) {
             // when keycode is pressed
-            register_code(KC_LGUI);
-            register_code(KC_LSFT);
-            tap_code(KC_LEFT_BRACKET);
-            unregister_code(KC_LSFT);
-            unregister_code(KC_LGUI);
+            register_code(KC_LCTL);
+            tap_code(KC_PGUP);
+            unregister_code(KC_LCTL);
         } else {
             // when keycode is released
         }
@@ -336,11 +316,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      case FORWARD_COMBO:
         if (record->event.pressed) {
             // when keycode is pressed
-            register_code(KC_LGUI);
-            register_code(KC_LSFT);
-            tap_code(KC_RIGHT_BRACKET);
-            unregister_code(KC_LSFT);
-            unregister_code(KC_LGUI);
+            register_code(KC_LCTL);
+            tap_code(KC_PGDN);
+            unregister_code(KC_LCTL);
         } else {
             // when keycode is released
         }
@@ -370,6 +348,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             unregister_code(KC_LALT);
         } else {
             // when keycode is released
+        }
+        break;
+
+     case MOVE_WINDOW:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LGUI);
+            // register_mouse_button(KC_BTN1);
+            // register_mouse_button(MOUSE_BTN1);
+            register_code(KC_BTN1);
+        } else {
+            // when keycode is released
+            // unregister_mouse_button(KC_BTN1);
+            // unregister_mouse_button(MOUSE_BTN1);
+            unregister_code(KC_BTN1);
+            unregister_code(KC_LGUI);
+        }
+        break;
+
+     case RESIZE_WINDOW:
+        if (record->event.pressed) {
+            // when keycode is pressed
+            register_code(KC_LGUI);
+            register_code(KC_BTN2);
+            // register_mouse_button(MOUSE_BTN2);
+            // register_mouse_button(c);
+        } else {
+            // when keycode is released
+            unregister_code(KC_BTN2);
+            unregister_code(KC_LGUI);
+            // unregister_mouse_button(MOUSE_BTN2);
+            
         }
         break;
 
