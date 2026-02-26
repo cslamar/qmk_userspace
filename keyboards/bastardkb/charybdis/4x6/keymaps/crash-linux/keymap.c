@@ -36,9 +36,9 @@ enum custom_keycodes {
      SLACK_MEETING,
      NEW_INCOG,
      SIGNAL_TOGGLE,
-     COPY_URL,
+     MULTI_SPECIAL,
      NEW_DEV_WINDOW,
-     NEW_CODE_WINDOW,
+     FLOAT_WINDOW,
      RAYCAST,
      BACK_COMBO,
      FORWARD_COMBO,
@@ -86,8 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                               KC_BSPC, KC_SPACE, KC_LGUI,        KC_LALT,  KC_ENT,
-                                        KC_LCTL,  LOWER,          RAISE
+                               KC_BSPC, KC_SPACE,       KC_LGUI,        KC_LALT,  KC_ENT,
+                                        MULTI_SPECIAL,  LOWER,          RAISE
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -99,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
        KC_LSFT, KC_LGUI,   SIGNAL_TOGGLE,    NEW_DEV_WINDOW, TOGGLE_FULL, XXXXXXX,             HOLO_WINDOW,  KC_LEFT, KC_DOWN, KC_RGHT, KC_EQUAL, KC_PGUP,
   // ├──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────┤
-      _______, XXXXXXX, COPY_URL, CHRIS_WINDOW, NEW_CODE_WINDOW, XXXXXXX,                     NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PGDN,
+      _______, XXXXXXX, _______, CHRIS_WINDOW, FLOAT_WINDOW, XXXXXXX,                     NEW_INCOG,    SLACK_MEETING,   KC_P2,   KC_P3, KC_PSLS, KC_PGDN,
   // ╰──────────────────────────────────────────────────────┤                           ├──────────────────────────────────────────────────────╯
                                 KC_DELETE, KC_PAGE_UP, _______,                               XXXXXXX,   _______,
                                            _______, _______,                                  KC_P0
@@ -108,16 +108,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_RAISE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮                   ╭──────────────────────────────────────────────────────╮
-        KC_GRAVE,   KC_F1,   KC_F2,   KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,                      KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F12,   KC_F11,
+        KC_GRAVE,   KC_F1,   KC_F2,   KC_MEDIA_PREV_TRACK,   KC_MEDIA_PLAY_PAUSE,   KC_MEDIA_NEXT_TRACK,   KC_F6,       KC_F7,   KC_F8,   KC_F9,  KC_F12,   KC_F11,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,     XXXXXXX,   BACK_COMBO, XXXXXXX, FORWARD_COMBO, SLACK_PIKA, KC_VOLU,
+       _______, XXXXXXX, KC_LEFT_BRACKET, KC_RIGHT_BRACKET, XXXXXXX, NEW_TERM,      XXXXXXX,   BACK_COMBO, XXXXXXX, FORWARD_COMBO, SLACK_PIKA, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  KC_PGUP,                  HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
+       _______, KC_LEFT,   SIGNAL_TOGGLE, NEW_DEV_WINDOW, TOGGLE_FULL,  KC_PGUP,    HOLO_WINDOW, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────┤
-       _______, KC_HOME, COPY_URL, CHRIS_WINDOW,  NEW_CODE_WINDOW, KC_PGDN,                  NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
+       _______, KC_HOME, _______, CHRIS_WINDOW,  FLOAT_WINDOW, KC_PGDN,             NEW_INCOG,   SLACK_MEETING, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤                   ├──────────────────────────────────────────────────────╯
-                                  KC_DELETE, RAYCAST2, _______,                        KC_PAGE_UP, _______,
-                                           _______,  _______,                        _______
+                                  KC_DELETE, RAYCAST2, _______,                     KC_PAGE_UP, _______,
+                                           _______,  _______,                       _______
   //                            ╰───────────────────────────╯                   ╰──────────────────╯
   ),
 
@@ -274,18 +274,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
 
 
-     case COPY_URL:
+     case MULTI_SPECIAL:
         if (record->event.pressed) {
             // when keycode is pressed
-            register_code(KC_LALT);
             register_code(KC_LCTL);
             register_code(KC_LSFT);
-            tap_code(KC_X);
-            unregister_code(KC_LSFT);
-            unregister_code(KC_LCTL);
-            unregister_code(KC_LALT);
         } else {
             // when keycode is released
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
         }
         break;
 
@@ -336,16 +333,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
 
-     case NEW_CODE_WINDOW:
+     case FLOAT_WINDOW:
         if (record->event.pressed) {
             // when keycode is pressed
-            register_code(KC_LALT);
-            register_code(KC_LCTL);
-            register_code(KC_LSFT);
+            register_code(KC_LGUI);
             tap_code(KC_V);
-            unregister_code(KC_LSFT);
-            unregister_code(KC_LCTL);
-            unregister_code(KC_LALT);
+            unregister_code(KC_LGUI);
         } else {
             // when keycode is released
         }
